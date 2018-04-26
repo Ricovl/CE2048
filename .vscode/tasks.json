@@ -10,11 +10,13 @@
             "args": [
             //    "debug"
             ],
+            
             "presentation": {
                 "echo": true,
-                "reveal": "silent",
+                "reveal": "always",
                 "focus": false,
                 "panel": "shared"
+                
             },
             "group": {
                 "kind": "build",

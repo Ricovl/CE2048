@@ -25,7 +25,7 @@ uint8_t board[SIZE][SIZE], boardOld[SIZE][SIZE];
 unsigned score = 0, scoreOld = 0, Hscore = 0;
 bool gameOver = false;
 
-gfx_rletsprite_t *num_sprite[11] = {num_2, num_4, num_8, num_16, num_32, num_64, num_128, num_256, num_512, num_1024, num_2048};
+gfx_rletsprite_t *num_sprite[12] = {num_2, num_4, num_8, num_16, num_32, num_64, num_128, num_256, num_512, num_1024, num_2048, num_4096};
 
 void move(uint8_t x1, uint8_t x2, uint8_t y1, uint8_t y2);
 void drawTile(uint24_t x_pos, uint8_t y_pos);
@@ -44,7 +44,7 @@ void main(void) {
     gfx_Begin();
     gfx_SetPalette(numbers_gfx_pal, sizeof_numbers_gfx_pal, 0);
 
-	memset(&board, 0, sizeof(board));
+    memset(&board, 0, sizeof(board));
 	
     ti_CloseAll();
 
@@ -53,9 +53,11 @@ void main(void) {
         ti_Read(&board, sizeof(uint24_t), sizeof(board) / sizeof(uint8_t), file);
         ti_Read(&score, sizeof(uint24_t), sizeof(score) / sizeof(uint24_t), file);
         ti_Read(&Hscore, sizeof(uint24_t), sizeof(Hscore) / sizeof(uint24_t), file);
-    } else
+    } 
+    else {
         drawNew();
-		
+    }
+
     ti_CloseAll();
 
     draw_Screen();
@@ -150,7 +152,7 @@ void drawTile(uint24_t x_pos, uint8_t y_pos) {
     gfx_HorizLine_NoClip(x_pos + 2, y_pos + 49, 46);
 
     // Draw number if position > 0 and <= 2048
-    if (tile > 0 && tile < 12) {
+    if (tile > 0 && tile < 13) {
         gfx_RLETSprite_NoClip(num_sprite[tile - 1],
                               x_pos + 25 - *(uint8_t *)(num_sprite[tile - 1]) / 2,
                               (uint8_t) ((y_pos + 25) - *((uint8_t*)num_sprite[tile - 1] + 1) / 2));
