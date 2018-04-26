@@ -1,0 +1,6 @@
+src/gfx/*.c
+src/gfx/*.h
+*.log
+content
+bin
+obj
