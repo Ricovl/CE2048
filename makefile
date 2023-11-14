@@ -5,11 +5,14 @@
 # Set COMPRESSED to "YES" to create a compressed program
 # ----------------------------
 
-NAME		?= CE2048
-COMPRESSED	?= YES
-ICON		?= iconc.png
-DESCRIPTION	?= "CE2048"
+NAME		= CE2048
+COMPRESSED	= YES
+ICON		= iconc.png
+DESCRIPTION	= "CE2048"
+
+CFLAGS = -Wall -Wextra -Oz
+CXXFLAGS = -Wall -Wextra -Oz
 
 # ----------------------------
 
-include $(CEDEV)/include/.makefile
+include $(shell cedev-config --makefile)

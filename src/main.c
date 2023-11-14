@@ -35,18 +35,16 @@ void draw_Screen(void);
 void drawAllTiles(void);
 
 
-void main(void) {
+int main(void) {
     sk_key_t key = 1;
     ti_var_t file;
 
     srand(rtc_Time());
 
     gfx_Begin();
-    gfx_SetPalette(numbers_gfx_pal, sizeof_numbers_gfx_pal, 0);
+    gfx_SetPalette(palette, sizeof_palette, 0);
 
     memset(&board, 0, sizeof(board));
-	
-    ti_CloseAll();
 
     file = ti_Open("CE2048", "r");
     if (file) {
@@ -58,7 +56,8 @@ void main(void) {
         drawNew();
     }
 
-    ti_CloseAll();
+    ti_Close(file);
+    file = 0;
 
     draw_Screen();
 
@@ -130,8 +129,11 @@ void main(void) {
     }
 
     ti_SetArchiveStatus(true, file);
+    ti_Close(file);
 
     gfx_End();
+
+    return 0;
 }
 
 /* Draws a tile on the given position */
@@ -164,7 +166,6 @@ void move(uint8_t x1, uint8_t x2, uint8_t y1, uint8_t y2) {
     const int8_t delta = -(x1 + y1) + (x2 + y2);
     bool moved = false;
     bool moved_recent = false;
-    unsigned i;
     int8_t x, y;
     uint8_t j;
     uint8_t boardTemp[SIZE][SIZE];

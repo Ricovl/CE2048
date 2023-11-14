@@ -1,0 +1,20 @@
+palettes:
+  - name: palette
+    fixed-entries:
+      - image: main_palette.png
+
+converts:
+  - name: myimages
+    palette: palette
+    transparent-index: 0
+    style: 'rlet'
+    images:
+      - numbers/*
+
+outputs:
+  - type: c
+    include-file: numbers_gfx.h
+    palettes:
+      - palette
+    converts:
+      - myimages
